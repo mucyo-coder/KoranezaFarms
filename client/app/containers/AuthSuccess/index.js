@@ -22,7 +22,7 @@ class AuthSuccess extends React.PureComponent {
   render() {
     const { authenticated } = this.props;
 
-    if (authenticated) { return <Redirect to='/dashboard' />; }
+    if (authenticated) return <Redirect to='/dashboard' />;
 
     return <LoadingIndicator />;
   }

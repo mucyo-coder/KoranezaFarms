@@ -72,7 +72,7 @@ export const signUp = () => {
       const response = await axios.post('/api/auth/register', user);
 
       const successfulOptions = {
-        title: "You have signed up successfully! You will be receiving an email as well. Thank you!",
+        title: `You have signed up successfully! You will be receiving an email as well. Thank you!`,
         position: 'tr',
         autoDismiss: 1
       };
@@ -85,7 +85,7 @@ export const signUp = () => {
       dispatch(success(successfulOptions));
       dispatch({ type: SIGNUP_RESET });
     } catch (error) {
-      const title = "Please try to signup again!";
+      const title = `Please try to signup again!`;
       handleError(error, dispatch, title);
     } finally {
       dispatch({ type: SET_SIGNUP_SUBMITTING, payload: false });

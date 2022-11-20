@@ -71,7 +71,7 @@ const Support = props => {
         const user_id = localStorage.getItem('selected_suport_chat');
         if (user_id) {
           const user = users.find(u => u.id === user_id);
-          if (user) { selectUser(user); }
+          if (user) selectUser(user);
         }
       }
     }
@@ -107,7 +107,7 @@ const Support = props => {
   };
 
   const onMessageSubmit = message => {
-    if (!selectedUser) { return; }
+    if (!selectedUser) return;
     socket.emit('message', {
       text: message,
       to: selectedUser?.id

@@ -62,7 +62,7 @@ export const fetchAddresses = () => {
   return async (dispatch, getState) => {
     try {
       dispatch(setAddressLoading(true));
-      const response = await axios.get("/api/address");
+      const response = await axios.get(`/api/address`);
       dispatch({ type: FETCH_ADDRESSES, payload: response.data.addresses });
     } catch (error) {
       handleError(error, dispatch);
@@ -119,7 +119,7 @@ export const addAddress = () => {
         ...newAddress
       };
 
-      const response = await axios.post("/api/address/add", address);
+      const response = await axios.post(`/api/address/add`, address);
 
       const successfulOptions = {
         title: `${response.data.message}`,

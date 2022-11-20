@@ -91,7 +91,7 @@ class List extends React.PureComponent {
               <OrderList orders={filteredOrders} />
             </>
           )}
-          {!(isLoading || displayOrders ) && (
+          {!isLoading && !displayOrders && (
             <NotFound message='you have no orders yet!' />
           )}
         </SubPage>

@@ -27,7 +27,7 @@ const Input = props => {
   } = props;
 
   const _onChange = e => {
-    if (e.target.name === 'image') {
+    if (e.target.name == 'image') {
       onInputChange(e.target.name, e.target.files[0]);
     } else {
       onInputChange(e.target.name, e.target.value);
@@ -51,7 +51,7 @@ const Input = props => {
           placeholder={placeholder}
           className={'textarea-text'}
         />
-        <span className='invalid-message'>{error?.[0]}</span>
+        <span className='invalid-message'>{error && error[0]}</span>
       </div>
     );
   } else if (type === 'number') {
@@ -82,7 +82,7 @@ const Input = props => {
           placeholder={placeholder}
           className={'input-number'}
         />
-        <span className='invalid-message'>{error?.[0]}</span>
+        <span className='invalid-message'>{error && error[0]}</span>
       </div>
     );
   } else if (type === 'stars') {
@@ -107,11 +107,11 @@ const Input = props => {
             onInputChange(name, value);
           }}
         />
-        <span className='invalid-message'>{error?.[0]}</span>
+        <span className='invalid-message'>{error && error[0]}</span>
       </div>
     );
   } else {
-    const styles = `input-box${inlineElement ? " inline-btn-box" : ''} ${
+    const styles = `input-box${inlineElement ? ` inline-btn-box` : ''} ${
       error ? 'invalid' : ''
     }`;
 
@@ -133,7 +133,7 @@ const Input = props => {
           />
           {inlineElement}
         </div>
-        <span className='invalid-message'>{error?.[0]}</span>
+        <span className='invalid-message'>{error && error[0]}</span>
       </div>
     );
   }

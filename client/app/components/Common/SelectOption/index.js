@@ -44,7 +44,7 @@ const SelectOption = props => {
         onChange={_handleSelectChange}
         styles={dropdownStyles}
       />
-      <span className='invalid-message'>{error?.[0]}</span>
+      <span className='invalid-message'>{error && error[0]}</span>
     </div>
   );
 };
@@ -64,7 +64,7 @@ const dropdownStyles = {
       borderColor: isFocused ? '#bdcbd2' : '#e4e6eb',
 
       ':hover': {
-        borderColor: isFocused ? '#bdcbd2' : '#e4e6eb',
+        borderColor: !isFocused ? '#e4e6eb' : '#bdcbd2',
         boxShadow: 'none'
       }
     };
@@ -90,12 +90,12 @@ const dropdownStyles = {
 
       ':hover': {
         ...styles[':hover'],
-        backgroundColor: isDisabled ? undefined : '#eceef3'
+        backgroundColor: !isDisabled ? '#eceef3' : undefined
       },
 
       ':active': {
         ...styles[':active'],
-        backgroundColor: isDisabled ? undefined : '#eceef3'
+        backgroundColor: !isDisabled ? '#eceef3' : undefined
       }
     };
   },

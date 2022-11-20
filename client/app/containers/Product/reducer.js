@@ -108,7 +108,7 @@ const productReducer = (state = initialState, action) => {
         ...state,
         products: [...state.products, action.payload]
       };
-    case REMOVE_PRODUCT: {
+    case REMOVE_PRODUCT:
       const index = state.products.findIndex(b => b._id === action.payload);
       return {
         ...state,
@@ -117,7 +117,6 @@ const productReducer = (state = initialState, action) => {
           ...state.products.slice(index + 1)
         ]
       };
-    }
     case PRODUCT_CHANGE:
       return {
         ...state,

@@ -94,7 +94,7 @@ class Customer extends React.PureComponent {
               <OrderList orders={filteredOrders} />
             </>
           )}
-          {!(isLoading || displayOrders ) && (
+          {!isLoading && !displayOrders && (
             <NotFound message='No orders found.' />
           )}
         </SubPage>

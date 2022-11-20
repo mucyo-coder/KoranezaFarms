@@ -23,7 +23,7 @@ const rateMarks = {
           className='fa fa-star fa-1x'
           style={{ display: 'contents' }}
           aria-hidden='true'
-        />
+        ></i>
       </span>
     )
   },
@@ -31,7 +31,7 @@ const rateMarks = {
     label: (
       <span>
         <span className='mr-1'>4</span>
-        <i className='fa fa-star fa-1x' aria-hidden='true' />
+        <i className='fa fa-star fa-1x' aria-hidden='true'></i>
       </span>
     )
   },
@@ -39,7 +39,7 @@ const rateMarks = {
     label: (
       <span>
         <span className='mr-1'>3</span>
-        <i className='fa fa-star fa-1x' aria-hidden='true' />
+        <i className='fa fa-star fa-1x' aria-hidden='true'></i>
       </span>
     )
   },
@@ -47,7 +47,7 @@ const rateMarks = {
     label: (
       <span>
         <span className='mr-1'>2</span>
-        <i className='fa fa-star fa-1x' aria-hidden='true' />
+        <i className='fa fa-star fa-1x' aria-hidden='true'></i>
       </span>
     )
   },
@@ -55,7 +55,7 @@ const rateMarks = {
     label: (
       <span>
         <span className='mr-1'>1</span>
-        <i className='fa fa-star fa-1x' aria-hidden='true' />
+        <i className='fa fa-star fa-1x' aria-hidden='true'></i>
       </span>
     )
   },

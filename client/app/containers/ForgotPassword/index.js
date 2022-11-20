@@ -25,7 +25,7 @@ class ForgotPassword extends React.PureComponent {
       forgotPassowrd
     } = this.props;
 
-    if (authenticated) { return <Redirect to='/dashboard' />; }
+    if (authenticated) return <Redirect to='/dashboard' />;
 
     const handleSubmit = event => {
       event.preventDefault();

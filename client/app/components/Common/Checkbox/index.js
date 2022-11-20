@@ -34,7 +34,7 @@ const Checkbox = props => {
         type={'checkbox'}
         id={id}
         name={name}
-        checked={disabled ? false : isChecked}
+        checked={!disabled ? isChecked : false}
         onChange={_onChange}
       />
       <label htmlFor={id} type='submit'>

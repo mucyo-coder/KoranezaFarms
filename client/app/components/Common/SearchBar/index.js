@@ -70,7 +70,7 @@ class SearchBar extends React.Component {
     } = this.props;
     const { value } = this.state;
 
-    const styles = `search-box${inlineBtn ? " inline-btn-box" : ''}`;
+    const styles = `search-box${inlineBtn ? ` inline-btn-box` : ''}`;
     const classNames = `input-text search-box${`${
       className && ` ${className}`
     }`}`;

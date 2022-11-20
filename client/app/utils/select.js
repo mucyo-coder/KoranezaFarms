@@ -28,7 +28,7 @@ export const formatSelectOptions = (data, empty = false, from) => {
 };
 
 export const unformatSelectOptions = data => {
-  if (!data) { return null; }
+  if (!data) return null;
 
   let newSelectOptions = [];
 

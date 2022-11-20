@@ -54,16 +54,7 @@ const OrderItems = props => {
         </Link>
       );
     } else if (item.status !== 'Cancelled') {
-      if (isAdmin) {
-        return (
-          <DropdownConfirm
-            label={item.product && item.status}
-            className={isAdmin ? 'admin' : ''}
-          >
-            {renderPopoverContent(item)}
-          </DropdownConfirm>
-        );
-      } else {
+      if (!isAdmin) {
         return (
           <DropdownConfirm label='Cancel'>
             <div className='d-flex flex-column align-items-center justify-content-center p-2'>
@@ -78,6 +69,15 @@ const OrderItems = props => {
                 onClick={() => updateOrderItemStatus(item._id, 'Cancelled')}
               />
             </div>
+          </DropdownConfirm>
+        );
+      } else {
+        return (
+          <DropdownConfirm
+            label={item.product && item.status}
+            className={isAdmin ? 'admin' : ''}
+          >
+            {renderPopoverContent(item)}
           </DropdownConfirm>
         );
       }
@@ -96,7 +96,7 @@ const OrderItems = props => {
                   <img
                     className='item-image'
                     src={`${
-                      item.product?.imageUrl
+                      item.product && item.product.imageUrl
                         ? item.product.imageUrl
                         : '/images/placeholder-image.png'
                     }`}

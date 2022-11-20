@@ -11,7 +11,7 @@ import { signOut } from '../containers/Login/actions';
 const handleError = (err, dispatch, title = '') => {
   const unsuccessfulOptions = {
     title: `${title}`,
-    message: "",
+    message: ``,
     position: 'tr',
     autoDismiss: 1
   };

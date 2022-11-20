@@ -37,7 +37,7 @@ export const fetchReviews = (n, v) => {
     try {
       dispatch({ type: SET_REVIEWS_LOADING, payload: true });
 
-      const response = await axios.get("/api/review", {
+      const response = await axios.get(`/api/review`, {
         params: {
           page: v ?? 1,
           limit: 20
@@ -95,7 +95,7 @@ export const deleteReview = id => {
         autoDismiss: 1
       };
 
-      if (response.data.success === true) {
+      if (response.data.success == true) {
         dispatch(success(successfulOptions));
         dispatch({
           type: REMOVE_REVIEW,
@@ -169,7 +169,7 @@ export const addProductReview = () => {
       }
 
       const santizedReview = santizeFields(newReview);
-      const response = await axios.post("/api/review/add", santizedReview);
+      const response = await axios.post(`/api/review/add`, santizedReview);
 
       const successfulOptions = {
         title: `${response.data.message}`,
@@ -205,35 +205,30 @@ export const getProductReviewsSummary = reviews => {
       totalReviews += 1;
 
       switch (Math.round(item.rating)) {
-        case 5: {
+        case 5:
           ratingSummary[0][5] += 1;
           totalSummary += 1;
           break;
-        }
-        case 4: {
+        case 4:
           ratingSummary[1][4] += 1;
           totalSummary += 1;
 
           break;
-        }
-        case 3: {
+        case 3:
           ratingSummary[2][3] += 1;
           totalSummary += 1;
 
           break;
-        }
-        case 2: {
+        case 2:
           ratingSummary[3][2] += 1;
           totalSummary += 1;
 
           break;
-        }
-        case 1: {
+        case 1:
           ratingSummary[4][1] += 1;
           totalSummary += 1;
 
           break;
-        }
         default:
           0;
           break;

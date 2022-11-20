@@ -117,7 +117,7 @@ export const handleCart = () => {
   };
 
   return (dispatch, getState) => {
-    if (cart.cartItems !== undefined) {
+    if (cart.cartItems != undefined) {
       dispatch({
         type: HANDLE_CART,
         payload: cart
@@ -130,7 +130,7 @@ export const handleCart = () => {
 export const handleCheckout = () => {
   return (dispatch, getState) => {
     const successfulOptions = {
-      title: "Please Login to proceed to checkout",
+      title: `Please Login to proceed to checkout`,
       position: 'tr',
       autoDismiss: 1
     };
@@ -159,7 +159,7 @@ export const getCartId = () => {
 
       // create cart id if there is no one
       if (!cartId) {
-        const response = await axios.post("/api/cart/add", { products });
+        const response = await axios.post(`/api/cart/add`, { products });
 
         dispatch(setCartId(response.data.cartId));
       }

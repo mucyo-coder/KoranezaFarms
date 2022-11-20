@@ -58,7 +58,7 @@ const addressReducer = (state = initialState, action) => {
         ...state,
         addresses: [...state.addresses, action.payload]
       };
-    case REMOVE_ADDRESS: {
+    case REMOVE_ADDRESS:
       const index = state.addresses.findIndex(b => b._id === action.payload);
       return {
         ...state,
@@ -67,7 +67,6 @@ const addressReducer = (state = initialState, action) => {
           ...state.addresses.slice(index + 1)
         ]
       };
-    }
     case ADDRESS_CHANGE:
       return {
         ...state,

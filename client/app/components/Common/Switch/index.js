@@ -57,7 +57,7 @@ class Switch extends React.Component {
         />
         <label htmlFor={id} className='switch-label'>
           {label && <span className='switch-label-text'>{label} </span>}
-          <span className='switch-label-toggle' />
+          <span className='switch-label-toggle'></span>
         </label>
       </div>
     );

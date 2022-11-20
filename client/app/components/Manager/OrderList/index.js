@@ -20,7 +20,7 @@ const OrderList = props => {
         <img
           className='item-image'
           src={`${
-            product?.imageUrl
+            product && product?.imageUrl
               ? product?.imageUrl
               : '/images/placeholder-image.png'
           }`}
@@ -47,7 +47,7 @@ const OrderList = props => {
                     {order?.products ? (
                       <span className='order-label order-status'>{` ${order?.products[0].status}`}</span>
                     ) : (
-                      <span className='order-label order-status'>{" Unavailable"}</span>
+                      <span className='order-label order-status'>{` Unavailable`}</span>
                     )}
                   </div>
                   <div className='mb-1'>

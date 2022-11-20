@@ -14,7 +14,7 @@ export const updateWishlist = (isLiked, productId) => {
   return async (dispatch, getState) => {
     try {
       if (getState().authentication.authenticated === true) {
-        const response = await axios.post("/api/wishlist", {
+        const response = await axios.post(`/api/wishlist`, {
           isLiked,
           product: productId
         });
@@ -31,7 +31,7 @@ export const updateWishlist = (isLiked, productId) => {
         }
       } else {
         const retryOptions = {
-          title: "Please login to wishlist a product",
+          title: `Please login to wishlist a product`,
           position: 'tr',
           autoDismiss: 1
         };
@@ -49,7 +49,7 @@ export const fetchWishlist = () => {
     try {
       dispatch({ type: SET_WISHLIST_LOADING, payload: true });
 
-      const response = await axios.get("/api/wishlist");
+      const response = await axios.get(`/api/wishlist`);
 
       dispatch({ type: FETCH_WISHLIST, payload: response.data.wishlist });
     } catch (error) {

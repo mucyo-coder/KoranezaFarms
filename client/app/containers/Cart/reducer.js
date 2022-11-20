@@ -23,17 +23,16 @@ const cartReducer = (state = initialState, action) => {
   let newState;
 
   switch (action.type) {
-    case ADD_TO_CART: {
+    case ADD_TO_CART:
       newState = {
         ...state,
         cartItems: [...state.cartItems, action.payload]
       };
 
       return newState;
-    }
-    case REMOVE_FROM_CART: {
+    case REMOVE_FROM_CART:
       let itemIndex = state.cartItems.findIndex(
-        x => x._id === action.payload._id
+        x => x._id == action.payload._id
       );
 
       newState = {
@@ -45,16 +44,14 @@ const cartReducer = (state = initialState, action) => {
       };
 
       return newState;
-    }
-    case HANDLE_CART_TOTAL: {
+    case HANDLE_CART_TOTAL:
       newState = {
         ...state,
         cartTotal: action.payload
       };
 
       return newState;
-    }
-    case HANDLE_CART: {
+    case HANDLE_CART:
       newState = {
         ...state,
         cartItems: action.payload.cartItems,
@@ -62,15 +59,13 @@ const cartReducer = (state = initialState, action) => {
         cartId: action.payload.cartId
       };
       return newState;
-    }
-    case SET_CART_ID: {
+    case SET_CART_ID:
       newState = {
         ...state,
         cartId: action.payload
       };
       return newState;
-    }
-    case CLEAR_CART: {
+    case CLEAR_CART:
       newState = {
         ...state,
         cartItems: [],
@@ -78,7 +73,6 @@ const cartReducer = (state = initialState, action) => {
         cartId: ''
       };
       return newState;
-    }
 
     default:
       return state;

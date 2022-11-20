@@ -65,7 +65,7 @@ const brandReducer = (state = initialState, action) => {
         ...state,
         brands: [...state.brands, action.payload]
       };
-    case REMOVE_BRAND: {
+    case REMOVE_BRAND:
       const index = state.brands.findIndex(b => b._id === action.payload);
       return {
         ...state,
@@ -74,7 +74,6 @@ const brandReducer = (state = initialState, action) => {
           ...state.brands.slice(index + 1)
         ]
       };
-    }
     case BRAND_CHANGE:
       return {
         ...state,

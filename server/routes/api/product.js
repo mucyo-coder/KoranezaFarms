@@ -252,21 +252,6 @@ router.get("/list/select", auth, async (req, res) => {
 	}
 });
 
-router.post("/test", upload.single("image"), async (req, res) => {
-	try {
-		const { imageUrl, imageKey } = await bucketUpload(req.file.path);
-		return res.status(200).json({
-			imageUrl,
-			imageKey,
-		});
-	} catch (error) {
-		console.log("error", error);
-		return res.status(400).json({
-			error: "Your request could not be processed. Please try again.",
-		});
-	}
-});
-
 // add product api
 router.post(
 	"/add",

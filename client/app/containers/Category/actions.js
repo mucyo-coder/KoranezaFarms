@@ -63,7 +63,7 @@ export const resetCategory = () => {
 export const fetchStoreCategories = () => {
   return async (dispatch, getState) => {
     try {
-      const response = await axios.get("/api/category/list");
+      const response = await axios.get(`/api/category/list`);
 
       dispatch({
         type: FETCH_STORE_CATEGORIES,
@@ -80,7 +80,7 @@ export const fetchCategories = () => {
   return async (dispatch, getState) => {
     try {
       dispatch({ type: SET_CATEGORIES_LOADING, payload: true });
-      const response = await axios.get("/api/category");
+      const response = await axios.get(`/api/category`);
 
       dispatch({
         type: FETCH_CATEGORIES,
@@ -144,7 +144,7 @@ export const addCategory = () => {
         return dispatch({ type: SET_CATEGORY_FORM_ERRORS, payload: errors });
       }
 
-      const response = await axios.post("/api/category/add", newCategory);
+      const response = await axios.post(`/api/category/add`, newCategory);
 
       const successfulOptions = {
         title: `${response.data.message}`,
@@ -263,7 +263,7 @@ export const deleteCategory = id => {
         autoDismiss: 1
       };
 
-      if (response.data.success === true) {
+      if (response.data.success == true) {
         dispatch(success(successfulOptions));
         dispatch({
           type: REMOVE_CATEGORY,

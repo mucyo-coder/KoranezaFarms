@@ -41,7 +41,7 @@ export const fetchOrders = (page = 1) => {
     try {
       dispatch(setOrderLoading(true));
 
-      const response = await axios.get("/api/order", {
+      const response = await axios.get(`/api/order`, {
         params: {
           page: page ?? 1,
           limit: 20
@@ -73,7 +73,7 @@ export const fetchAccountOrders = (page = 1) => {
     try {
       dispatch(setOrderLoading(true));
 
-      const response = await axios.get("/api/order/me", {
+      const response = await axios.get(`/api/order/me`, {
         params: {
           page: page ?? 1,
           limit: 20
@@ -105,7 +105,7 @@ export const searchOrders = filter => {
     try {
       dispatch(setOrderLoading(true));
 
-      const response = await axios.get("/api/order/search", {
+      const response = await axios.get(`/api/order/search`, {
         params: {
           search: filter.value
         }
@@ -153,7 +153,7 @@ export const cancelOrder = () => {
 
       await axios.delete(`/api/order/cancel/${order._id}`);
 
-      dispatch(push("/dashboard/orders"));
+      dispatch(push(`/dashboard/orders`));
     } catch (error) {
       handleError(error, dispatch);
     }
@@ -172,7 +172,7 @@ export const updateOrderItemStatus = (itemId, status) => {
       });
 
       if (response.data.orderCancelled) {
-        dispatch(push("/dashboard/orders"));
+        dispatch(push(`/dashboard/orders`));
       } else {
         dispatch(updateOrderStatus({ itemId, status }));
         dispatch(fetchOrder(order._id, false));
@@ -198,7 +198,7 @@ export const addOrder = () => {
       const total = getState().cart.cartTotal;
 
       if (cartId) {
-        const response = await axios.post("/api/order/add", {
+        const response = await axios.post(`/api/order/add`, {
           cartId,
           total
         });

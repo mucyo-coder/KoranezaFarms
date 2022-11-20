@@ -57,7 +57,7 @@ export const forgotPassowrd = () => {
 
       dispatch({ type: FORGOT_PASSWORD_RESET });
     } catch (error) {
-      const title = "Please try again!";
+      const title = `Please try again!`;
       handleError(error, dispatch, title);
     }
   };

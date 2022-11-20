@@ -34,7 +34,7 @@ const OrderMeta = props => {
           size='sm'
           text='Back to orders'
           onClick={onBack}
-        />
+        ></Button>
       </div>
 
       <Row>

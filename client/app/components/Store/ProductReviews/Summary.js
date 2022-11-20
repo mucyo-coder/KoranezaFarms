@@ -61,7 +61,7 @@ const Summary = props => {
                       parseInt(r[Object.keys(r)[0]])
                     )}%`
                   }}
-                />
+                ></div>
               </div>
             </div>
             <div className='ml-2 right'>

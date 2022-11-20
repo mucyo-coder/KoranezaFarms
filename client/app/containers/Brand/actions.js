@@ -51,7 +51,7 @@ export const brandEditChange = (name, value) => {
 export const fetchStoreBrands = () => {
   return async (dispatch, getState) => {
     try {
-      const response = await axios.get("/api/brand/list");
+      const response = await axios.get(`/api/brand/list`);
 
       dispatch({
         type: FETCH_STORE_BRANDS,
@@ -69,7 +69,7 @@ export const fetchBrands = () => {
     try {
       dispatch({ type: SET_BRANDS_LOADING, payload: true });
 
-      const response = await axios.get("/api/brand");
+      const response = await axios.get(`/api/brand`);
 
       dispatch({
         type: FETCH_BRANDS,
@@ -103,7 +103,7 @@ export const fetchBrand = brandId => {
 export const fetchBrandsSelect = () => {
   return async (dispatch, getState) => {
     try {
-      const response = await axios.get("/api/brand/list/select");
+      const response = await axios.get(`/api/brand/list/select`);
 
       const formattedBrands = formatSelectOptions(response.data.brands, true);
 
@@ -138,7 +138,7 @@ export const addBrand = () => {
         return dispatch({ type: SET_BRAND_FORM_ERRORS, payload: errors });
       }
 
-      const response = await axios.post("/api/brand/add", brand);
+      const response = await axios.post(`/api/brand/add`, brand);
 
       const successfulOptions = {
         title: `${response.data.message}`,

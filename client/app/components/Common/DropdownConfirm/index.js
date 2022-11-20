@@ -21,7 +21,7 @@ const DropdownConfirm = props => {
         <DropdownToggle nav={true}>
           <div className='dropdown-action sm'>
             {label}
-            <span className='fa fa-chevron-down dropdown-caret' />
+            <span className='fa fa-chevron-down dropdown-caret'></span>
           </div>
         </DropdownToggle>
         <DropdownMenu right={true}>{children}</DropdownMenu>

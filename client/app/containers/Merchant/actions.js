@@ -106,7 +106,7 @@ export const addMerchant = (isBack = false) => {
       if (response.data.success === true) {
         dispatch(success(successfulOptions));
         dispatch({ type: RESET_MERCHANT });
-        if (isBack) { dispatch(goBack()); }
+        if (isBack) dispatch(goBack());
       }
     } catch (error) {
       handleError(error, dispatch);
@@ -122,7 +122,7 @@ export const fetchMerchants = (n, v) => {
     try {
       dispatch(setMerchantLoading(true));
 
-      const response = await axios.get("/api/merchant", {
+      const response = await axios.get(`/api/merchant`, {
         params: {
           page: v ?? 1,
           limit: 20
@@ -153,7 +153,7 @@ export const searchMerchants = filter => {
     try {
       dispatch(setMerchantLoading(true));
 
-      const response = await axios.get("/api/merchant/search", {
+      const response = await axios.get(`/api/merchant/search`, {
         params: {
           search: filter.value
         }
@@ -180,9 +180,8 @@ export const disableMerchant = (merchant, value, search, page) => {
         }
       });
 
-      if (search) {
+      if (search)
         return dispatch(searchMerchants({ name: 'merchant', value: search })); // update search list if this is a search result
-      }
       dispatch(fetchMerchants('merchant', page));
     } catch (error) {
       handleError(error, dispatch);
@@ -195,9 +194,8 @@ export const approveMerchant = (merchant, search, page) => {
     try {
       await axios.put(`/api/merchant/approve/${merchant._id}`);
 
-      if (search) {
+      if (search)
         return dispatch(searchMerchants({ name: 'merchant', value: search })); // update search list if this is a search result
-      }
       dispatch(fetchMerchants('merchant', page));
     } catch (error) {
       handleError(error, dispatch);
@@ -210,9 +208,8 @@ export const rejectMerchant = (merchant, search, page) => {
     try {
       await axios.put(`/api/merchant/reject/${merchant._id}`);
 
-      if (search) {
+      if (search)
         return dispatch(searchMerchants({ name: 'merchant', value: search })); // update search list if this is a search result
-      }
       dispatch(fetchMerchants('merchant', page));
     } catch (error) {
       handleError(error, dispatch);
@@ -246,7 +243,7 @@ export const merchantSignUp = token => {
       await axios.post(`/api/merchant/signup/${token}`, merchant);
 
       const successfulOptions = {
-        title: "You have signed up successfully! Please sign in with the email and password. Thank you!",
+        title: `You have signed up successfully! Please sign in with the email and password. Thank you!`,
         position: 'tr',
         autoDismiss: 1
       };
@@ -256,7 +253,7 @@ export const merchantSignUp = token => {
       dispatch(push('/login'));
       dispatch({ type: SIGNUP_RESET });
     } catch (error) {
-      const title = "Please try to signup again!";
+      const title = `Please try to signup again!`;
       handleError(error, dispatch, title);
     }
   };
@@ -279,9 +276,8 @@ export const deleteMerchant = (merchant, search, page) => {
       if (response.data.success === true) {
         dispatch(success(successfulOptions));
 
-        if (search) {
+        if (search)
           return dispatch(searchMerchants({ name: 'merchant', value: search })); // update search list if this is a search result
-        }
 
         dispatch(fetchMerchants('merchant', page));
 

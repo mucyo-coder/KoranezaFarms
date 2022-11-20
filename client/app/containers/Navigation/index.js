@@ -244,7 +244,7 @@ class Navigation extends React.PureComponent {
                     >
                       <DropdownToggle nav={true}>
                         Brands
-                        <span className='fa fa-chevron-down dropdown-caret' />
+                        <span className='fa fa-chevron-down dropdown-caret'></span>
                       </DropdownToggle>
                       <DropdownMenu right={true} className='nav-brand-dropdown'>
                         <div className='mini-brand'>
@@ -269,7 +269,7 @@ class Navigation extends React.PureComponent {
                     <UncontrolledDropdown nav={true} inNavbar={true}>
                       <DropdownToggle nav={true}>
                         {user.firstName ? user.firstName : 'Welcome'}
-                        <span className='fa fa-chevron-down dropdown-caret' />
+                        <span className='fa fa-chevron-down dropdown-caret'></span>
                       </DropdownToggle>
                       <DropdownMenu right={true}>
                         <DropdownItem
@@ -284,7 +284,7 @@ class Navigation extends React.PureComponent {
                     <UncontrolledDropdown nav={true} inNavbar={true}>
                       <DropdownToggle nav={true}>
                         Welcome!
-                        <span className='fa fa-chevron-down dropdown-caret' />
+                        <span className='fa fa-chevron-down dropdown-caret'></span>
                       </DropdownToggle>
                       <DropdownMenu right={true}>
                         <DropdownItem onClick={() => history.push('/login')}>

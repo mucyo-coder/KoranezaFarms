@@ -3,7 +3,7 @@ import Button from '../../Common/Button';
 
 const UserList = props => {
   const { users, selectedUser, selectUser } = props;
-  if (!users) { return null; }
+  if (!users) return null;
 
   const _selectUser = u => {
     selectUser(u);
@@ -27,7 +27,7 @@ const UserList = props => {
               icon={
                 <span
                   className={`circle ${isOnline ? 'online' : 'offline'}`}
-                />
+                ></span>
               }
             />
           </li>

@@ -45,7 +45,7 @@ class NavigationMenu extends React.PureComponent {
                   <li key={index} className='menu-item'>
                     <NavLink
                       onClick={handleCategoryClick}
-                      to={`/shop/category/${link.slug}`}
+                      to={'/shop/category/' + link.slug}
                       activeClassName='active-link'
                       exact={true}
                     >

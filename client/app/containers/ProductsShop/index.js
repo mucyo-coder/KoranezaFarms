@@ -35,7 +35,7 @@ class ProductsShop extends React.PureComponent {
             updateWishlist={updateWishlist}
           />
         )}
-        {!(isLoading || displayProducts ) && (
+        {!isLoading && !displayProducts && (
           <NotFound message='no products found.' />
         )}
       </div>

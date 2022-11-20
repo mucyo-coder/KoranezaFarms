@@ -20,7 +20,6 @@ exports.bucketUpload = async (imagePath) => {
 			const bucketUpload = await cloudinary.uploader.upload(imagePath, params);
 			imageUrl = bucketUpload.secure_url;
 			imageKey = bucketUpload.public_id;
-			console.log("bucketUpload", bucketUpload);
 		} catch (error) {
 			console.log("Error uploading to cloudinary bucket =>", error);
 		}

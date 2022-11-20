@@ -86,7 +86,7 @@ export const filterProducts = (n, v) => {
       const sortOrder = getSortOrder(payload.order);
       payload = { ...payload, sortOrder };
 
-      const response = await axios.get("/api/product/list", {
+      const response = await axios.get(`/api/product/list`, {
         params: {
           ...payload
         }
@@ -170,7 +170,7 @@ export const fetchBrandProducts = slug => {
 export const fetchProductsSelect = () => {
   return async (dispatch, getState) => {
     try {
-      const response = await axios.get("/api/product/list/select");
+      const response = await axios.get(`/api/product/list/select`);
 
       const formattedProducts = formatSelectOptions(response.data.products);
 
@@ -190,7 +190,7 @@ export const fetchProducts = () => {
     try {
       dispatch(setProductLoading(true));
 
-      const response = await axios.get("/api/product");
+      const response = await axios.get(`/api/product`);
 
       dispatch({
         type: FETCH_PRODUCTS,
@@ -266,7 +266,7 @@ export const addProduct = () => {
         taxable: product.taxable.value,
         brand:
           user.role !== 'ROLE_MERCHANT'
-            ? brand !== 0
+            ? brand != 0
               ? brand
               : null
             : brands[1].value
@@ -295,6 +295,7 @@ export const addProduct = () => {
         for (const key in newProduct) {
           if (newProduct.hasOwnProperty(key)) {
             if (key === 'brand' && newProduct[key] === null) {
+              continue;
             } else {
               formData.set(key, newProduct[key]);
             }
@@ -302,7 +303,7 @@ export const addProduct = () => {
         }
       }
 
-      const response = await axios.post("/api/product/add", formData, {
+      const response = await axios.post(`/api/product/add`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' }
       });
 
@@ -354,7 +355,7 @@ export const updateProduct = () => {
         quantity: product.quantity,
         price: product.price,
         taxable: product.taxable,
-        brand: brand !== 0 ? brand : null
+        brand: brand != 0 ? brand : null
       };
 
       const { isValid, errors } = allFieldsValidation(newProduct, rules, {
@@ -545,18 +546,15 @@ const productsFilterOrganizer = (n, v, s) => {
 const getSortOrder = value => {
   let sortOrder = {};
   switch (value) {
-    case 0: {
+    case 0:
       sortOrder._id = -1;
       break;
-    }
-    case 1: {
+    case 1:
       sortOrder.price = -1;
       break;
-    }
-    case 2: {
+    case 2:
       sortOrder.price = 1;
       break;
-    }
 
     default:
       break;

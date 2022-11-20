@@ -61,14 +61,14 @@ export const resetPassword = token => {
         autoDismiss: 1
       };
 
-      if (response.data.success === true) {
+      if (response.data.success == true) {
         dispatch(push('/login'));
       }
 
       dispatch(success(successfulOptions));
       dispatch({ type: RESET_PASSWORD_RESET });
     } catch (error) {
-      const title = "Please try to reset again!";
+      const title = `Please try to reset again!`;
       handleError(error, dispatch, title);
     }
   };
@@ -98,7 +98,7 @@ export const resetAccountPassword = () => {
         });
       }
 
-      const response = await axios.post("/api/auth/reset", user);
+      const response = await axios.post(`/api/auth/reset`, user);
       const successfulOptions = {
         title: `${response.data.message}`,
         position: 'tr',
@@ -112,7 +112,7 @@ export const resetAccountPassword = () => {
       dispatch(success(successfulOptions));
       dispatch({ type: RESET_PASSWORD_RESET });
     } catch (error) {
-      const title = "Please try to reset again!";
+      const title = `Please try to reset again!`;
       handleError(error, dispatch, title);
     }
   };
