@@ -50,7 +50,7 @@ $ yarn install
 ```
  Create .env file that include:
 
-  * PORT=8000
+  * PORT
   * MONGO_URI
   * JWT_SECRET
   * CLOUDINARY_API_KEY
