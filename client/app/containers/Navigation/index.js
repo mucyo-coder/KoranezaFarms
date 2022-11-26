@@ -31,19 +31,18 @@ import actions from "../../actions";
 import Button from "../../components/Common/Button";
 import CartIcon from "../../components/Common/CartIcon";
 import { BarsIcon } from "../../components/Common/Icon";
-import MiniBrand from "../../components/Store//MiniBrand";
+import MiniCategory from "../../components/Store//MiniCategory";
 import Menu from "../NavigationMenu";
 import Cart from "../Cart";
 
 class Navigation extends React.PureComponent {
 	componentDidMount() {
-		this.props.fetchStoreBrands();
 		this.props.fetchStoreCategories();
 	}
 
-	toggleBrand() {
-		this.props.fetchStoreBrands();
-		this.props.toggleBrand();
+	toggleCategory() {
+		this.props.fetchStoreCategories();
+		this.props.toggleCategory();
 	}
 
 	toggleMenu() {
@@ -113,12 +112,11 @@ class Navigation extends React.PureComponent {
 			authenticated,
 			user,
 			cartItems,
-			brands,
 			categories,
 			signOut,
 			isMenuOpen,
 			isCartOpen,
-			isBrandOpen,
+			isCategoryOpen,
 			toggleCart,
 			toggleMenu,
 			searchValue,
@@ -222,22 +220,22 @@ class Navigation extends React.PureComponent {
 									onClick={toggleCart}
 								/>
 								<Nav navbar={true}>
-									{brands && brands.length > 0 && (
+									{categories && categories.length > 0 && (
 										<Dropdown
 											nav={true}
 											inNavbar={true}
-											toggle={() => this.toggleBrand()}
-											isOpen={isBrandOpen}
+											toggle={() => this.toggleCategory()}
+											isOpen={isCategoryOpen}
 										>
 											<DropdownToggle nav={true}>
-												Brands
+												Categories
 												<span className='fa fa-chevron-down dropdown-caret' />
 											</DropdownToggle>
 											<DropdownMenu right={true} className='nav-brand-dropdown'>
 												<div className='mini-brand'>
-													<MiniBrand
-														brands={brands}
-														toggleBrand={() => this.toggleBrand()}
+													<MiniCategory
+														categories={categories}
+														toggleCategory={() => this.toggleCategory()}
 													/>
 												</div>
 											</DropdownMenu>
@@ -329,7 +327,7 @@ const mapStateToProps = (state) => {
 	return {
 		isMenuOpen: state.navigation.isMenuOpen,
 		isCartOpen: state.navigation.isCartOpen,
-		isBrandOpen: state.navigation.isBrandOpen,
+		isCategoryOpen: state.navigation.isCategoryOpen,
 		cartItems: state.cart.cartItems,
 		brands: state.brand.storeBrands,
 		categories: state.category.storeCategories,
