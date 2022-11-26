@@ -26,7 +26,7 @@ export {};
 // 		const message = prepareTemplate(type, host, data);
 
 // 		const config = {
-// 			from: `MERN Store! <${sender}>`,
+// 			from: `Koraneza Farms! <${sender}>`,
 // 			to: email,
 // 			subject: message.subject,
 // 			text: message.text,
