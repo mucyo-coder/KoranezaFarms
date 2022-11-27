@@ -25,7 +25,7 @@ import Notification from "../Notification";
 import ForgotPassword from "../ForgotPassword";
 import ResetPassword from "../ResetPassword";
 import Shop from "../Shop";
-import BrandsPage from "../BrandsPage";
+import CategoriesPage from "../CategoriesPage";
 import ProductPage from "../ProductPage";
 import Sell from "../Sell";
 import Contact from "../Contact";
@@ -85,7 +85,7 @@ class Application extends React.PureComponent {
 								<Route path='/shop' component={Shop} />
 								<Route path='/sell' component={Sell} />
 								<Route path='/contact' component={Contact} />
-								<Route path='/brands' component={BrandsPage} />
+								<Route path='/categories' component={CategoriesPage} />
 								<Route path='/product/:slug' component={ProductPage} />
 								<Route path='/order/success/:id' component={OrderSuccess} />
 								<Route path='/order/:id' component={OrderPage} />
