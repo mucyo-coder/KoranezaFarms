@@ -12,30 +12,11 @@ import { Container } from "reactstrap";
 
 import actions from "../../actions";
 
-import Button from "../../components/Common/Button";
-import { CloseIcon } from "../../components/Common/Icon";
-
 class NavigationMenu extends React.PureComponent {
 	render() {
-		const { isMenuOpen, categories, toggleMenu } = this.props;
-
-		const handleCategoryClick = () => {
-			this.props.toggleMenu();
-		};
-
+		const { categories } = this.props;
 		return (
 			<div className='navigation-menu'>
-				<div className='menu-header'>
-					{isMenuOpen && (
-						<Button
-							borderless={true}
-							variant='empty'
-							ariaLabel='close the menu'
-							icon={<CloseIcon />}
-							onClick={toggleMenu}
-						/>
-					)}
-				</div>
 				<div className='menu-body'>
 					<Container>
 						<h3 className='menu-title'>Shop By Category</h3>
@@ -64,7 +45,6 @@ class NavigationMenu extends React.PureComponent {
 
 const mapStateToProps = (state) => {
 	return {
-		isMenuOpen: state.navigation.isMenuOpen,
 		categories: state.category.storeCategories,
 	};
 };

@@ -174,14 +174,6 @@
   font-size: $font-size-small;
 }
 
-.drawer-backdrop {
-  @include transition();
-
-  &.dark-overflow {
-    @include transition();
-  }
-}
-
 .avatar {
   border-radius: 50%;
 }

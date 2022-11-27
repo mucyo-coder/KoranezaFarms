@@ -18,37 +18,10 @@
   }
 }
 
-// show hidden menu popup
-.mini-menu-open {
-  .mini-menu {
-    visibility: visible;
-    left: 0;
-    @include transition($layout-transition-higher-speed);
-  }
-
-  .dark-overflow {
-    @include dark-overflow();
-    @include media-breakpoint-down(xs) {
-      width: 100%;
-      top: 0;
-    }
-  }
-}
 
 .navigation-menu {
   height: 100%;
   background-color: $theme-white;
-
-  .menu-header {
-    border-bottom: $border-default;
-    text-align: right;
-    padding-right: 5px;
-    align-items: center;
-    justify-content: flex-end;
-    height: 50px;
-    @include flex();
-  }
-
   .menu-title {
     padding: 10px 0px 10px 30px;
   }

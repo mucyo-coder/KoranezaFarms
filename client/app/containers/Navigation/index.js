@@ -45,11 +45,6 @@ class Navigation extends React.PureComponent {
 		this.props.toggleCategory();
 	}
 
-	toggleMenu() {
-		this.props.fetchStoreCategories();
-		this.props.toggleMenu();
-	}
-
 	getSuggestionValue(suggestion) {
 		return suggestion.name;
 	}
@@ -114,11 +109,9 @@ class Navigation extends React.PureComponent {
 			cartItems,
 			categories,
 			signOut,
-			isMenuOpen,
 			isCartOpen,
 			isCategoryOpen,
 			toggleCart,
-			toggleMenu,
 			searchValue,
 			suggestions,
 			onSearch,
@@ -146,16 +139,6 @@ class Navigation extends React.PureComponent {
 							className='pr-0'
 						>
 							<div className='brand'>
-								{categories && categories.length > 0 && (
-									<Button
-										borderless={true}
-										variant='empty'
-										className='d-none d-md-block'
-										ariaLabel='open the menu'
-										icon={<BarsIcon />}
-										onClick={() => this.toggleMenu()}
-									/>
-								)}
 								<Link to='/'>
 									<h1 className='logo'>Koraneza Farms</h1>
 								</Link>
@@ -193,7 +176,6 @@ class Navigation extends React.PureComponent {
 									variant='empty'
 									ariaLabel='open the menu'
 									icon={<BarsIcon />}
-									onClick={() => this.toggleMenu()}
 								/>
 								<CartIcon cartItems={cartItems} onClick={toggleCart} />
 							</div>
@@ -302,22 +284,6 @@ class Navigation extends React.PureComponent {
 						onClick={toggleCart}
 					/>
 				</div>
-
-				{/* hidden menu drawer */}
-				<div
-					className={isMenuOpen ? "mini-menu-open" : "hidden-mini-menu"}
-					aria-hidden={`${isMenuOpen ? false : true}`}
-				>
-					<div className='mini-menu'>
-						<Menu />
-					</div>
-					<button
-						className={
-							isMenuOpen ? "drawer-backdrop dark-overflow" : "drawer-backdrop"
-						}
-						onClick={toggleMenu}
-					/>
-				</div>
 			</header>
 		);
 	}
@@ -325,7 +291,6 @@ class Navigation extends React.PureComponent {
 
 const mapStateToProps = (state) => {
 	return {
-		isMenuOpen: state.navigation.isMenuOpen,
 		isCartOpen: state.navigation.isCartOpen,
 		isCategoryOpen: state.navigation.isCategoryOpen,
 		cartItems: state.cart.cartItems,

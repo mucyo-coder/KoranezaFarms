@@ -7,19 +7,12 @@
 import axios from "axios";
 import handleError from "../../utils/error";
 import {
-	TOGGLE_MENU,
 	TOGGLE_CART,
 	TOGGLE_CATEGORY,
 	SEARCH_CHANGE,
 	SUGGESTIONS_FETCH_REQUEST,
 	SUGGESTIONS_CLEAR_REQUEST,
 } from "./constants";
-
-export const toggleMenu = () => {
-	return {
-		type: TOGGLE_MENU,
-	};
-};
 
 export const toggleCart = () => {
 	return {
