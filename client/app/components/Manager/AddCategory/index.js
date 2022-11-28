@@ -11,7 +11,6 @@ import { Row, Col } from "reactstrap";
 import Input from "../../Common/Input";
 import Switch from "../../Common/Switch";
 import Button from "../../Common/Button";
-import SelectOption from "../../Common/SelectOption";
 
 const AddCategory = (props) => {
 	const {
