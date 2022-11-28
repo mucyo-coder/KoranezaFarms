@@ -144,7 +144,6 @@ export const addCategory = () => {
 			const rules = {
 				name: "required",
 				description: "required|max:200",
-				products: "required",
 			};
 
 			const category = getState().category.categoryFormData;
@@ -152,7 +151,6 @@ export const addCategory = () => {
 			const newCategory = {
 				name: category.name,
 				description: category.description,
-				products: unformatSelectOptions(category.products),
 			};
 
 			const { isValid, errors } = allFieldsValidation(newCategory, rules, {
@@ -160,7 +158,6 @@ export const addCategory = () => {
 				"required.description": "Description is required.",
 				"max.description":
 					"Description may not be greater than 200 characters.",
-				"required.products": "Products are required.",
 			});
 
 			if (!isValid) {
