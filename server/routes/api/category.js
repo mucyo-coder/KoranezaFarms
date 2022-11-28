@@ -104,7 +104,12 @@ router.put("/:id", auth, role.checkRole(role.ROLES.Admin), async (req, res) => {
 			$or: [{ slug }],
 		});
 
-		if (foundCategory && foundCategory._id !== categoryId) {
+		console.log("foundCategory", foundCategory._id, categoryId);
+
+		if (
+			foundCategory &&
+			foundCategory._id.toString() !== categoryId.toString()
+		) {
 			return res.status(400).json({ error: "Slug is already in use." });
 		}
 
