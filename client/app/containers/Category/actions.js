@@ -195,7 +195,6 @@ export const updateCategory = () => {
 				name: "required",
 				slug: "required|alpha_dash",
 				description: "required|max:200",
-				products: "required",
 			};
 
 			const category = getState().category.category;
@@ -204,7 +203,6 @@ export const updateCategory = () => {
 				name: category.name,
 				slug: category.slug,
 				description: category.description,
-				products: category.products && unformatSelectOptions(category.products),
 			};
 
 			const { isValid, errors } = allFieldsValidation(newCategory, rules, {
@@ -215,7 +213,6 @@ export const updateCategory = () => {
 				"required.description": "Description is required.",
 				"max.description":
 					"Description may not be greater than 200 characters.",
-				"required.products": "Products are required.",
 			});
 
 			if (!isValid) {
