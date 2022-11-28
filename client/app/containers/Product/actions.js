@@ -212,15 +212,15 @@ export const fetchProduct = (id) => {
 
 			const inventory = response.data.product.quantity;
 
-			const brand = response.data.product.brand;
-			const isBrand = brand ? true : false;
-			const brandData = formatSelectOptions(
-				isBrand && [brand],
-				!isBrand,
+			const category = response.data.product.category;
+			const isCategory = category ? true : false;
+			const CategoryData = formatSelectOptions(
+				isCategory && [category],
+				!isCategory,
 				"fetchProduct",
 			);
 
-			response.data.product.brand = brandData[0];
+			response.data.product.category = CategoryData[0];
 
 			const product = { ...response.data.product, inventory };
 
@@ -246,14 +246,14 @@ export const addProduct = () => {
 				price: "required|numeric",
 				taxable: "required",
 				image: "required",
-				brand: "required",
+				category: "required",
 			};
 
 			const product = getState().product.productFormData;
 			const user = getState().account.user;
-			const brands = getState().brand.brandsSelect;
+			const categories = getState().category.categoriesSelect;
 
-			const brand = unformatSelectOptions([product.brand]);
+			const category = unformatSelectOptions([product.category]);
 
 			const newProduct = {
 				sku: product.sku,
@@ -264,12 +264,12 @@ export const addProduct = () => {
 				image: product.image,
 				isActive: product.isActive,
 				taxable: product.taxable.value,
-				brand:
+				category:
 					user.role !== "ROLE_MERCHANT"
-						? brand !== 0
-							? brand
+						? category !== 0
+							? category
 							: null
-						: brands[1].value,
+						: categories[1].value,
 			};
 
 			const { isValid, errors } = allFieldsValidation(newProduct, rules, {
@@ -284,7 +284,7 @@ export const addProduct = () => {
 				"required.price": "Price is required.",
 				"required.taxable": "Taxable is required.",
 				"required.image": "Please upload files with jpg, jpeg, png format.",
-				"required.brand": "Brand is required.",
+				"required.category": "Category is required.",
 			});
 
 			if (!isValid) {
@@ -294,7 +294,7 @@ export const addProduct = () => {
 			if (newProduct.image) {
 				for (const key in newProduct) {
 					if (newProduct.hasOwnProperty(key)) {
-						if (key === "brand" && newProduct[key] === null) {
+						if (key === "category" && newProduct[key] === null) {
 						} else {
 							formData.set(key, newProduct[key]);
 						}
@@ -339,12 +339,12 @@ export const updateProduct = () => {
 				quantity: "required|numeric",
 				price: "required|numeric",
 				taxable: "required",
-				brand: "required",
+				category: "required",
 			};
 
 			const product = getState().product.product;
 
-			const brand = unformatSelectOptions([product.brand]);
+			const category = unformatSelectOptions([product.category]);
 
 			const newProduct = {
 				name: product.name,
@@ -354,7 +354,7 @@ export const updateProduct = () => {
 				quantity: product.quantity,
 				price: product.price,
 				taxable: product.taxable,
-				brand: brand !== 0 ? brand : null,
+				category: category !== 0 ? category : null,
 			};
 
 			const { isValid, errors } = allFieldsValidation(newProduct, rules, {
@@ -371,7 +371,7 @@ export const updateProduct = () => {
 				"required.quantity": "Quantity is required.",
 				"required.price": "Price is required.",
 				"required.taxable": "Taxable is required.",
-				"required.brand": "Brand is required.",
+				"required.category": "Category is required.",
 			});
 
 			if (!isValid) {
@@ -459,7 +459,6 @@ const productsFilterOrganizer = (n, v, s) => {
 			return {
 				name: s.name,
 				category: v,
-				brand: s.brand,
 				min: s.min,
 				max: s.max,
 				rating: s.rating,

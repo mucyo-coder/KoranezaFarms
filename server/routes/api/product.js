@@ -91,24 +91,24 @@ router.get("/list", async (req, res) => {
 		sortOrder = JSON.parse(sortOrder);
 
 		const categoryFilter = category ? { category } : {};
-		const basicQuery = getStoreProductsQuery(min, max, rating);
 
 		const userDoc = await checkAuth(req);
-		const categoryDoc = await Category.findOne(
-			{ slug: categoryFilter.category, isActive: true },
-			"products -_id",
-		);
+		const categoryDoc = await Category.findOne({
+			slug: categoryFilter.category,
+			isActive: true,
+		});
+
+		let queries = [];
 
 		if (categoryDoc && categoryFilter !== category) {
-			basicQuery.push({
+			queries.push({
 				$match: {
-					isActive: true,
-					_id: {
-						$in: Array.from(categoryDoc.products),
-					},
+					"category._id": Mongoose.Types.ObjectId(categoryDoc._id),
 				},
 			});
 		}
+
+		const basicQuery = getStoreProductsQuery(min, max, rating, queries);
 
 		let products = null;
 		const productsCount = await Product.aggregate(basicQuery);
@@ -238,7 +238,7 @@ router.get("/list/brand/:slug", async (req, res) => {
 	}
 });
 
-router.get("/list/select", auth, async (req, res) => {
+router.get("/list/select", async (_req, res) => {
 	try {
 		const products = await Product.find({}, "name");
 
@@ -267,7 +267,7 @@ router.post(
 			const price = req.body.price;
 			const taxable = req.body.taxable;
 			const isActive = req.body.isActive;
-			const brand = req.body.brand;
+			const category = req.body.category;
 			const imagePath = req.file.path;
 
 			if (!sku) {
@@ -304,7 +304,7 @@ router.post(
 				price,
 				taxable,
 				isActive,
-				brand,
+				category,
 				imageUrl,
 				imageKey,
 			});

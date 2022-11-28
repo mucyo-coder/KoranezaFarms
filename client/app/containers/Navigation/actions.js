@@ -36,7 +36,7 @@ export const onSearch = (v) => {
 export const onSuggestionsFetchRequested = (value) => {
 	const inputValue = value.value.trim().toLowerCase();
 
-	return async (dispatch, getState) => {
+	return async (dispatch) => {
 		try {
 			if (inputValue && inputValue.length % 3 === 0) {
 				const response = await axios.get(

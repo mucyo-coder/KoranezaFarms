@@ -10,7 +10,6 @@ const store = require("../../utils/store");
 router.post("/add", auth, role.checkRole(role.ROLES.Admin), (req, res) => {
 	const name = req.body.name;
 	const description = req.body.description;
-	const products = req.body.products;
 	const isActive = req.body.isActive;
 
 	if (!(description && name)) {
@@ -22,7 +21,6 @@ router.post("/add", auth, role.checkRole(role.ROLES.Admin), (req, res) => {
 	const category = new Category({
 		name,
 		description,
-		products,
 		isActive,
 	});
 

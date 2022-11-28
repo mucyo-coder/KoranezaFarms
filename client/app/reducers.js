@@ -23,8 +23,6 @@ import addressReducer from "./containers/Address/reducer";
 import resetPasswordReducer from "./containers/ResetPassword/reducer";
 import usersReducer from "./containers/Users/reducer";
 import productReducer from "./containers/Product/reducer";
-import categoryReducer from "./containers/Category/reducer";
-import brandReducer from "./containers/Brand/reducer";
 import navigationMenuReducer from "./containers/NavigationMenu/reducer";
 import shopReducer from "./containers/Shop/reducer";
 import merchantReducer from "./containers/Merchant/reducer";
@@ -32,6 +30,8 @@ import contactReducer from "./containers/Contact/reducer";
 import orderReducer from "./containers/Order/reducer";
 import reviewReducer from "./containers/Review/reducer";
 import wishListReducer from "./containers/WishList/reducer";
+import brandReducer from "./containers/Brand/reducer";
+import categoryReducer from "./containers/Category/reducer";
 
 const createReducer = (history) =>
 	combineReducers({
@@ -51,8 +51,8 @@ const createReducer = (history) =>
 		resetPassword: resetPasswordReducer,
 		users: usersReducer,
 		product: productReducer,
-		category: categoryReducer,
 		brand: brandReducer,
+		category: categoryReducer,
 		menu: navigationMenuReducer,
 		shop: shopReducer,
 		merchant: merchantReducer,

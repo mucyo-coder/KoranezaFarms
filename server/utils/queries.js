@@ -1,112 +1,92 @@
-const Mongoose = require('mongoose');
+const Mongoose = require("mongoose");
 
-exports.getStoreProductsQuery = (min, max, rating) => {
-  rating = Number(rating);
-  max = Number(max);
-  min = Number(min);
+exports.getStoreProductsQuery = (min, max, rating, queries = []) => {
+	rating = Number(rating || 0);
+	max = Number(max || Infinity);
+	min = Number(min || 0);
 
-  const priceFilter = min && max ? { price: { $gte: min, $lte: max } } : {};
-  const ratingFilter = rating
-    ? { rating: { $gte: rating } }
-    : { rating: { $gte: rating } };
+	const basicQuery = [
+		{
+			$lookup: {
+				from: "categories",
+				localField: "category",
+				foreignField: "_id",
+				as: "category",
+			},
+		},
+		{
+			$unwind: "$category",
+		},
+		{
+			$match: {
+				"category.isActive": true,
+			},
+		},
+		{
+			$lookup: {
+				from: "reviews",
+				localField: "_id",
+				foreignField: "product",
+				as: "reviews",
+			},
+		},
+		{
+			$addFields: {
+				totalRatings: { $sum: "$reviews.rating" },
+				totalReviews: { $size: "$reviews" },
+				averageRating: {
+					$cond: [
+						{ $eq: [{ $size: "$reviews" }, 0] },
+						0,
+						{ $divide: [{ $sum: "$reviews.rating" }, { $size: "$reviews" }] },
+					],
+				},
+			},
+		},
+		{
+			$match: {
+				isActive: true,
+				price: { $gte: min, $lte: max },
+				averageRating: { $gte: rating },
+			},
+		},
+		...queries,
+		{
+			$project: {
+				category: 0,
+				reviews: 0,
+			},
+		},
+	];
 
-  const matchQuery = {
-    isActive: true,
-    price: priceFilter.price,
-    averageRating: ratingFilter.rating
-  };
-
-  const basicQuery = [
-    {
-      $lookup: {
-        from: 'brands',
-        localField: 'brand',
-        foreignField: '_id',
-        as: 'brands'
-      }
-    },
-    {
-      $unwind: {
-        path: '$brands',
-        preserveNullAndEmptyArrays: true
-      }
-    },
-    {
-      $addFields: {
-        'brand.name': '$brands.name',
-        'brand._id': '$brands._id',
-        'brand.isActive': '$brands.isActive'
-      }
-    },
-    {
-      $match: {
-        'brand.isActive': true
-      }
-    },
-    {
-      $lookup: {
-        from: 'reviews',
-        localField: '_id',
-        foreignField: 'product',
-        as: 'reviews'
-      }
-    },
-    {
-      $addFields: {
-        totalRatings: { $sum: '$reviews.rating' },
-        totalReviews: { $size: '$reviews' }
-      }
-    },
-    {
-      $addFields: {
-        averageRating: {
-          $cond: [
-            { $eq: ['$totalReviews', 0] },
-            0,
-            { $divide: ['$totalRatings', '$totalReviews'] }
-          ]
-        }
-      }
-    },
-    {
-      $match: matchQuery
-    },
-    {
-      $project: {
-        brands: 0,
-        reviews: 0
-      }
-    }
-  ];
-
-  return basicQuery;
+	return basicQuery;
 };
 
-exports.getStoreProductsWishListQuery = userId => {
-  const wishListQuery = [
-    {
-      $lookup: {
-        from: 'wishlists',
-        let: { product: '$_id' },
-        pipeline: [
-          {
-            $match: {
-              $and: [
-                { $expr: { $eq: ['$$product', '$product'] } },
-                { user: new Mongoose.Types.ObjectId(userId) }
-              ]
-            }
-          }
-        ],
-        as: 'isLiked'
-      }
-    },
-    {
-      $addFields: {
-        isLiked: { $arrayElemAt: ['$isLiked.isLiked', 0] }
-      }
-    }
-  ];
+exports.getStoreProductsWishListQuery = (userId) => {
+	const wishListQuery = [
+		{
+			$lookup: {
+				from: "wishlists",
+				let: { product: "$_id" },
+				pipeline: [
+					{
+						$match: {
+							$and: [
+								{ $expr: { $eq: ["$$product", "$product"] } },
+								{ user: new Mongoose.Types.ObjectId(userId) },
+							],
+						},
+					},
+				],
+				as: "isLiked",
+			},
+		},
+		{
+			$addFields: {
+				isLiked: { $arrayElemAt: ["$isLiked.isLiked", 0] },
+			},
+		},
+	];
 
-  return wishListQuery;
+	return wishListQuery;
 };
