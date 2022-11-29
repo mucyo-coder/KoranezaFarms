@@ -24,21 +24,6 @@ router.post("/add", auth, async (req, res) => {
 
 		const orderDoc = await order.save();
 
-		// const cartDoc = await Cart.findById(orderDoc.cart._id).populate({
-		// 	path: "products.product",
-		// 	populate: {
-		// 		path: "brand",
-		// 	},
-		// });
-
-		// const newOrder = {
-		// 	_id: orderDoc._id,
-		// 	created: orderDoc.created,
-		// 	user: orderDoc.user,
-		// 	total: orderDoc.total,
-		// 	products: cartDoc.products,
-		// };
-
 		//TODO: use mailgun again when the it's ready
 		// await mailgun.sendEmail(order.user.email, 'order-confirmation', newOrder);
 
@@ -75,7 +60,7 @@ router.get("/search", auth, async (req, res) => {
 				populate: {
 					path: "products.product",
 					populate: {
-						path: "brand",
+						path: "category",
 					},
 				},
 			});
@@ -89,7 +74,7 @@ router.get("/search", auth, async (req, res) => {
 				populate: {
 					path: "products.product",
 					populate: {
-						path: "brand",
+						path: "category",
 					},
 				},
 			});
@@ -135,7 +120,7 @@ router.get("/", auth, async (req, res) => {
 				populate: {
 					path: "products.product",
 					populate: {
-						path: "brand",
+						path: "category",
 					},
 				},
 			})
@@ -173,7 +158,7 @@ router.get("/me", auth, async (req, res) => {
 				populate: {
 					path: "products.product",
 					populate: {
-						path: "brand",
+						path: "category",
 					},
 				},
 			})
@@ -210,7 +195,7 @@ router.get("/:orderId", auth, async (req, res) => {
 				populate: {
 					path: "products.product",
 					populate: {
-						path: "brand",
+						path: "category",
 					},
 				},
 			});
@@ -221,7 +206,7 @@ router.get("/:orderId", auth, async (req, res) => {
 				populate: {
 					path: "products.product",
 					populate: {
-						path: "brand",
+						path: "category",
 					},
 				},
 			});

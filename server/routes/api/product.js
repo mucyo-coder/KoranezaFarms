@@ -5,7 +5,6 @@ const Mongoose = require("mongoose");
 
 // Bring in Models & Utils
 const Product = require("../../models/product");
-const Brand = require("../../models/brand");
 const Category = require("../../models/category");
 const auth = require("../../middleware/auth");
 const role = require("../../middleware/role");
@@ -15,6 +14,7 @@ const {
 	getStoreProductsQuery,
 	getStoreProductsWishListQuery,
 } = require("../../utils/queries");
+const category = require("../../models/category");
 
 const storage = multer.diskStorage({});
 const upload = multer({ storage });
@@ -26,15 +26,15 @@ router.get("/item/:slug", async (req, res) => {
 
 		const productDoc = await Product.findOne({ slug, isActive: true }).populate(
 			{
-				path: "brand",
+				path: "category",
 				select: "name isActive slug",
 			},
 		);
 
-		const hasNoBrand =
-			productDoc?.brand === null || productDoc?.brand?.isActive === false;
+		const hasNoCategory =
+			productDoc?.category === null || productDoc?.category?.isActive === false;
 
-		if (!productDoc || hasNoBrand) {
+		if (!productDoc || hasNoCategory) {
 			return res.status(404).json({
 				message: "No product found.",
 			});
@@ -146,98 +146,6 @@ router.get("/list", async (req, res) => {
 	}
 });
 
-// fetch store products by brand api
-router.get("/list/brand/:slug", async (req, res) => {
-	try {
-		const slug = req.params.slug;
-
-		const brand = await Brand.findOne({ slug, isActive: true });
-
-		if (!brand) {
-			return res.status(404).json({
-				message: `Cannot find brand with the slug: ${slug}.`,
-			});
-		}
-
-		const userDoc = await checkAuth(req);
-
-		if (userDoc) {
-			const products = await Product.aggregate([
-				{
-					$match: {
-						isActive: true,
-						brand: brand._id,
-					},
-				},
-				{
-					$lookup: {
-						from: "wishlists",
-						let: { product: "$_id" },
-						pipeline: [
-							{
-								$match: {
-									$and: [
-										{ $expr: { $eq: ["$$product", "$product"] } },
-										{ user: new Mongoose.Types.ObjectId(userDoc.id) },
-									],
-								},
-							},
-						],
-						as: "isLiked",
-					},
-				},
-				{
-					$lookup: {
-						from: "brands",
-						localField: "brand",
-						foreignField: "_id",
-						as: "brands",
-					},
-				},
-				{
-					$addFields: {
-						isLiked: { $arrayElemAt: ["$isLiked.isLiked", 0] },
-					},
-				},
-				{
-					$unwind: "$brands",
-				},
-				{
-					$addFields: {
-						"brand.name": "$brands.name",
-						"brand._id": "$brands._id",
-						"brand.isActive": "$brands.isActive",
-					},
-				},
-				{ $project: { brands: 0 } },
-			]);
-
-			res.status(200).json({
-				products: products.reverse().slice(0, 8),
-				page: 1,
-				pages: products.length > 0 ? Math.ceil(products.length / 8) : 0,
-				totalProducts: products.length,
-			});
-		} else {
-			const products = await Product.find({
-				brand: brand._id,
-				isActive: true,
-			}).populate("brand", "name");
-
-			res.status(200).json({
-				products: products.reverse().slice(0, 8),
-				page: 1,
-				pages: products.length > 0 ? Math.ceil(products.length / 8) : 0,
-				totalProducts: products.length,
-			});
-		}
-	} catch (error) {
-		res.status(400).json({
-			error: "Your request could not be processed. Please try again.",
-		});
-	}
-});
-
 router.get("/list/select", async (_req, res) => {
 	try {
 		const products = await Product.find({}, "name");
@@ -324,52 +232,6 @@ router.post(
 	},
 );
 
-// fetch products api
-router.get(
-	"/",
-	auth,
-	role.checkRole(role.ROLES.Admin, role.ROLES.Merchant),
-	async (req, res) => {
-		try {
-			let products = [];
-
-			if (req.user.merchant) {
-				const brands = await Brand.find({
-					merchant: req.user.merchant,
-				}).populate("merchant", "_id");
-
-				const brandId = brands[0]?.["_id"];
-
-				products = await Product.find({})
-					.populate({
-						path: "brand",
-						populate: {
-							path: "merchant",
-							model: "Merchant",
-						},
-					})
-					.where("brand", brandId);
-			} else {
-				products = await Product.find({}).populate({
-					path: "brand",
-					populate: {
-						path: "merchant",
-						model: "Merchant",
-					},
-				});
-			}
-
-			res.status(200).json({
-				products,
-			});
-		} catch (error) {
-			res.status(400).json({
-				error: "Your request could not be processed. Please try again.",
-			});
-		}
-	},
-);
-
 // fetch product api
 router.get(
 	"/:id",
@@ -380,23 +242,26 @@ router.get(
 			const productId = req.params.id;
 
 			let productDoc = null;
+			//Here they first check the categories created by the seller and then after get the products from that specific category of the seller
 
 			if (req.user.merchant) {
-				const brands = await Brand.find({
-					merchant: req.user.merchant,
-				}).populate("merchant", "_id");
+				const categories = await category
+					.find({
+						merchant: req.user.merchant,
+					})
+					.populate("merchant", "_id");
 
-				const brandId = brands[0]["_id"];
+				const categoryId = categories[0]["_id"];
 
 				productDoc = await Product.findOne({ _id: productId })
 					.populate({
-						path: "brand",
+						path: "category",
 						select: "name",
 					})
-					.where("brand", brandId);
+					.where("category", categoryId);
 			} else {
 				productDoc = await Product.findOne({ _id: productId }).populate({
-					path: "brand",
+					path: "category",
 					select: "name",
 				});
 			}

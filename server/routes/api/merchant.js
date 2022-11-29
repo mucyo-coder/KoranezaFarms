@@ -6,14 +6,13 @@ const crypto = require("crypto");
 // Bring in Models & Helpers
 const Merchant = require("../../models/merchant");
 const User = require("../../models/user");
-const Brand = require("../../models/brand");
 const auth = require("../../middleware/auth");
 const role = require("../../middleware/role");
 
 // add merchant api
 router.post("/add", async (req, res) => {
 	try {
-		const { name, business, phoneNumber, email, brand } = req.body;
+		const { name, business, phoneNumber, email } = req.body;
 
 		if (!(name && email)) {
 			return res
@@ -46,7 +45,6 @@ router.post("/add", async (req, res) => {
 			email,
 			business,
 			phoneNumber,
-			brand,
 		});
 		const merchantDoc = await merchant.save();
 
@@ -81,7 +79,6 @@ router.get(
 					{ phoneNumber: { $regex: regex } },
 					{ email: { $regex: regex } },
 					{ name: { $regex: regex } },
-					{ brand: { $regex: regex } },
 					{ status: { $regex: regex } },
 				],
 			});
@@ -242,8 +239,6 @@ router.post("/signup/:token", async (req, res) => {
 			email,
 		});
 
-		await createMerchantBrand(merchantDoc);
-
 		res.status(200).json({
 			success: true,
 		});
@@ -275,17 +270,6 @@ router.delete(
 	},
 );
 
-const createMerchantBrand = async ({ _id, brand, business }) => {
-	const newBrand = new Brand({
-		name: brand,
-		description: business,
-		merchant: _id,
-		isActive: false,
-	});
-
-	return await newBrand.save();
-};
-
 const createMerchantUser = async (email, name, merchant, host) => {
 	const existingUser = await User.findOne({ email });
 
@@ -299,8 +283,6 @@ const createMerchantUser = async (email, name, merchant, host) => {
 		const merchantDoc = await Merchant.findOne({
 			email,
 		});
-
-		await createMerchantBrand(merchantDoc);
 
 		//TODO: use mailgun again when available
 		// await mailgun.sendEmail(email, "merchant-welcome", null, name);
