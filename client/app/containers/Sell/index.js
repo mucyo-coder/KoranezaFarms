@@ -7,7 +7,7 @@
 import React from "react";
 
 import { connect } from "react-redux";
-import { Row, Col } from "reactstrap";
+import { Row, Col, Container } from "reactstrap";
 
 import actions from "../../actions";
 
@@ -26,47 +26,49 @@ class Sell extends React.PureComponent {
 		} = this.props;
 
 		return (
-			<div className='sell'>
-				{isLoading && <LoadingIndicator />}
-				<h3 className='text-uppercase'>Become A Koraneza Farms Seller!</h3>
-				<hr />
-				<Row>
-					<Col xs='12' md='6' className='order-2 order-md-1'>
-						<AddMerchant
-							merchantFormData={merchantFormData}
-							formErrors={formErrors}
-							isSubmitting={isSubmitting}
-							submitTitle='Submit'
-							merchantChange={merchantChange}
-							addMerchant={addMerchant}
-						/>
-					</Col>
-					<Col xs='12' md='6' className='order-1 order-md-2'>
-						<Row>
-							<Col xs='12' className='order-2 order-md-1 text-md-center mb-3'>
-								<div className='agreement-banner-text'>
-									<h3>
-										Would you like to sell your products on Koraneza Farms!
-									</h3>
-									<h5>Grow your business with Koraneza Farms</h5>
-									<b>Apply Today</b>
-								</div>
-							</Col>
+			<Container>
+				<div className='sell wrapper'>
+					{isLoading && <LoadingIndicator />}
+					<h3 className='text-uppercase'>Become A Koraneza Farms Seller!</h3>
+					<hr />
+					<Row>
+						<Col xs='12' md='6' className='order-2 order-md-1'>
+							<AddMerchant
+								merchantFormData={merchantFormData}
+								formErrors={formErrors}
+								isSubmitting={isSubmitting}
+								submitTitle='Submit'
+								merchantChange={merchantChange}
+								addMerchant={addMerchant}
+							/>
+						</Col>
+						<Col xs='12' md='6' className='order-1 order-md-2'>
+							<Row>
+								<Col xs='12' className='order-2 order-md-1 text-md-center mb-3'>
+									<div className='agreement-banner-text'>
+										<h3>
+											Would you like to sell your products on Koraneza Farms!
+										</h3>
+										<h5>Grow your business with Koraneza Farms</h5>
+										<b>Apply Today</b>
+									</div>
+								</Col>
 
-							<Col
-								xs='12'
-								className='order-1 order-md-2 text-center mb-3 mb-md-0'
-							>
-								<img
-									className='agreement-banner'
-									src={"/images/banners/agreement.svg"}
-									alt='agreement banner'
-								/>
-							</Col>
-						</Row>
-					</Col>
-				</Row>
-			</div>
+								<Col
+									xs='12'
+									className='order-1 order-md-2 text-center mb-3 mb-md-0'
+								>
+									<img
+										className='agreement-banner'
+										src={"/images/banners/agreement.svg"}
+										alt='agreement banner'
+									/>
+								</Col>
+							</Row>
+						</Col>
+					</Row>
+				</div>
+			</Container>
 		);
 	}
 }

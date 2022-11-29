@@ -15,6 +15,7 @@ import Admin from "../../components/Manager/Dashboard/Admin";
 import Merchant from "../../components/Manager/Dashboard/Merchant";
 import Customer from "../../components/Manager/Dashboard/Customer";
 import LoadingIndicator from "../../components/Common/LoadingIndicator";
+import { Container } from "reactstrap";
 
 class Dashboard extends React.PureComponent {
 	componentDidMount() {
@@ -25,17 +26,19 @@ class Dashboard extends React.PureComponent {
 		const { user, isLoading } = this.props;
 
 		return (
-			<>
-				{isLoading ? (
-					<LoadingIndicator inline={true} />
-				) : user.role === ROLE_ADMIN ? (
-					<Admin links={dashboardLinks[ROLE_ADMIN]} />
-				) : user.role === ROLE_MERCHANT && user.merchant ? (
-					<Merchant links={dashboardLinks[ROLE_MERCHANT]} />
-				) : (
-					<Customer links={dashboardLinks[ROLE_MEMBER]} />
-				)}
-			</>
+			<Container>
+				<div className="wrapper">
+					{isLoading ? (
+						<LoadingIndicator inline={true} />
+					) : user.role === ROLE_ADMIN ? (
+						<Admin links={dashboardLinks[ROLE_ADMIN]} />
+					) : user.role === ROLE_MERCHANT && user.merchant ? (
+						<Merchant links={dashboardLinks[ROLE_MERCHANT]} />
+					) : (
+						<Customer links={dashboardLinks[ROLE_MEMBER]} />
+					)}
+				</div>
+			</Container>
 		);
 	}
 }

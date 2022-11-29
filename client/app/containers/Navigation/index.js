@@ -171,12 +171,6 @@ class Navigation extends React.PureComponent {
 							className='desktop-hidden'
 						>
 							<div className='header-links'>
-								<Button
-									borderless={true}
-									variant='empty'
-									ariaLabel='open the menu'
-									icon={<BarsIcon />}
-								/>
 								<CartIcon cartItems={cartItems} onClick={toggleCart} />
 							</div>
 						</Col>
