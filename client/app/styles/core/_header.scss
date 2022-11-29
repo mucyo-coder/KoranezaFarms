@@ -104,7 +104,7 @@
     }
 
     .dropdown-menu {
-      &.nav-brand-dropdown {
+      &.nav-category-dropdown {
         padding: 0;
         @include media-breakpoint-down(sm) {
           left: -30px;
@@ -121,7 +121,7 @@
     }
   }
 
-  .brand {
+  .category {
     @include flex();
     flex-wrap: wrap;
     align-items: center;
@@ -163,14 +163,14 @@
   }
 }
 
-// mini brand
-.mini-brand {
+// mini category
+.mini-category {
   min-width: 270px;
   @include media-breakpoint-up(md) {
     min-width: 500px;
   }
 
-  .min-brand-title {
+  .min-category-title {
     border-bottom: $border-primary;
     padding-bottom: 8px;
     margin-bottom: 16px;
@@ -183,12 +183,12 @@
     padding: 20px 40px;
   }
 
-  .mini-brand-block {
+  .mini-category-block {
     @include flex();
     flex-wrap: wrap;
     margin-top: 12px;
 
-    .brand-item {
+    .category-item {
       flex: 100%;
       margin-bottom: 10px;
 
@@ -196,7 +196,7 @@
         flex: 50%;
       }
 
-      .brand-link {
+      .category-link {
         position: relative;
         color: $font-custom-color !important;
         font-size: $font-size-large;

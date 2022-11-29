@@ -17,7 +17,7 @@ const MiniCategory = (props) => {
 
 	return (
 		<div className='mini-category-list'>
-			<div className='d-flex align-items-center justify-content-between min-brand-title'>
+			<div className='d-flex align-items-center justify-content-between min-category-title'>
 				<h4 className='mb-0 text-uppercase'>Shop By Category</h4>
 				<Link
 					to={"/categories"}
@@ -28,12 +28,12 @@ const MiniCategory = (props) => {
 					See all
 				</Link>
 			</div>
-			<div className='mini-brand-block'>
+			<div className='mini-category-block'>
 				{categories.map((category, index) => (
-					<div key={index} className='brand-item'>
+					<div key={index} className='category-item'>
 						<Link
 							to={`/shop/category/${category.slug}`}
-							className='brand-link'
+							className='category-link'
 							role='menuitem'
 						>
 							{category.name}

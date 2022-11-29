@@ -30,7 +30,6 @@ import contactReducer from "./containers/Contact/reducer";
 import orderReducer from "./containers/Order/reducer";
 import reviewReducer from "./containers/Review/reducer";
 import wishListReducer from "./containers/WishList/reducer";
-import brandReducer from "./containers/Brand/reducer";
 import categoryReducer from "./containers/Category/reducer";
 
 const createReducer = (history) =>
@@ -51,7 +50,6 @@ const createReducer = (history) =>
 		resetPassword: resetPasswordReducer,
 		users: usersReducer,
 		product: productReducer,
-		brand: brandReducer,
 		category: categoryReducer,
 		menu: navigationMenuReducer,
 		shop: shopReducer,

@@ -42,10 +42,6 @@ const initialState = {
 		image: {},
 		isActive: true,
 		taxable: { value: 0, label: "No" },
-		brand: {
-			value: 0,
-			label: "No Options Selected",
-		},
 	},
 	isLoading: false,
 	productShopData: {
@@ -57,7 +53,6 @@ const initialState = {
 	advancedFilters: {
 		name: "all",
 		category: "all",
-		brand: "all",
 		min: 1,
 		max: 2500,
 		rating: 0,
@@ -201,7 +196,6 @@ const productReducer = (state = initialState, action) => {
 				advancedFilters: {
 					name: "all",
 					category: "all",
-					brand: "all",
 					min: 1,
 					max: 2500,
 					rating: 0,

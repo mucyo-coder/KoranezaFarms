@@ -139,36 +139,8 @@ export const fetchStoreProduct = (slug) => {
 	};
 };
 
-export const fetchBrandProducts = (slug) => {
-	return async (dispatch, getState) => {
-		try {
-			dispatch(setProductLoading(true));
-
-			const response = await axios.get(`/api/product/list/brand/${slug}`);
-
-			const s = getState().product.advancedFilters;
-			dispatch({
-				type: SET_ADVANCED_FILTERS,
-				payload: Object.assign(s, {
-					pages: response.data.pages,
-					pageNumber: response.data.page,
-					totalProducts: response.data.totalProducts,
-				}),
-			});
-			dispatch({
-				type: FETCH_STORE_PRODUCTS,
-				payload: response.data.products,
-			});
-		} catch (error) {
-			handleError(error, dispatch);
-		} finally {
-			dispatch(setProductLoading(false));
-		}
-	};
-};
-
 export const fetchProductsSelect = () => {
-	return async (dispatch, getState) => {
+	return async (dispatch) => {
 		try {
 			const response = await axios.get("/api/product/list/select");
 
@@ -466,23 +438,10 @@ const productsFilterOrganizer = (n, v, s) => {
 				page: s.currentPage,
 				limit: s.limit,
 			};
-		case "brand":
-			return {
-				name: s.name,
-				category: s.category,
-				brand: v,
-				min: s.min,
-				max: s.max,
-				rating: s.rating,
-				order: s.order,
-				page: s.currentPage,
-				limit: s.limit,
-			};
 		case "sorting":
 			return {
 				name: s.name,
 				category: s.category,
-				brand: s.brand,
 				min: s.min,
 				max: s.max,
 				rating: s.rating,
@@ -494,7 +453,6 @@ const productsFilterOrganizer = (n, v, s) => {
 			return {
 				name: s.name,
 				category: s.category,
-				brand: s.brand,
 				min: v[0],
 				max: v[1],
 				rating: s.rating,
@@ -506,7 +464,6 @@ const productsFilterOrganizer = (n, v, s) => {
 			return {
 				name: s.name,
 				category: s.category,
-				brand: s.brand,
 				min: s.min,
 				max: s.max,
 				rating: v,
@@ -518,7 +475,6 @@ const productsFilterOrganizer = (n, v, s) => {
 			return {
 				name: s.name,
 				category: s.category,
-				brand: s.brand,
 				min: s.min,
 				max: s.max,
 				rating: s.rating,
@@ -530,7 +486,6 @@ const productsFilterOrganizer = (n, v, s) => {
 			return {
 				name: s.name,
 				category: s.category,
-				brand: s.brand,
 				min: s.min,
 				max: s.max,
 				rating: s.rating,

@@ -284,7 +284,9 @@ router.put("/status/item/:itemId", auth, async (req, res) => {
 		const status = req.body.status || "Cancelled";
 
 		const foundCart = await Cart.findOne({ "products._id": itemId });
-		const foundCartProduct = foundCart.products.find((p) => p._id === itemId);
+		const foundCartProduct = foundCart.products.find(
+			(p) => p._id.toString() === itemId.toString(),
+		);
 
 		await Cart.updateOne(
 			{ "products._id": itemId },
@@ -327,6 +329,7 @@ router.put("/status/item/:itemId", auth, async (req, res) => {
 			message: "Item status has been updated successfully!",
 		});
 	} catch (error) {
+		console.log(error);
 		res.status(400).json({
 			error: "Your request could not be processed. Please try again.",
 		});

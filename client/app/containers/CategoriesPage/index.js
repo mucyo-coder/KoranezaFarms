@@ -20,11 +20,7 @@ class CategoriesPage extends React.PureComponent {
 	render() {
 		const { categories } = this.props;
 
-		return (
-			<div className='brands-page'>
-				<CategoryList categories={categories} />
-			</div>
-		);
+		return <CategoryList categories={categories} />;
 	}
 }
 

@@ -14,7 +14,6 @@ import actions from "../../actions";
 import { sortOptions } from "../../utils/store";
 
 import ProductsShop from "../ProductsShop";
-import BrandsShop from "../BrandsShop";
 import CategoryShop from "../CategoryShop";
 
 import Page404 from "../../components/Common/Page404";
@@ -97,7 +96,6 @@ class Shop extends React.PureComponent {
 						<Switch>
 							<Route exact={true} path='/shop' component={ProductsShop} />
 							<Route path='/shop/category/:slug' component={CategoryShop} />
-							<Route path='/shop/brand/:slug' component={BrandsShop} />
 							<Route path='*' component={Page404} />
 						</Switch>
 

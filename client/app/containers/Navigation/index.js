@@ -138,7 +138,7 @@ class Navigation extends React.PureComponent {
 							lg={{ size: 3, order: 1 }}
 							className='pr-0'
 						>
-							<div className='brand'>
+							<div className='category'>
 								<Link to='/'>
 									<h1 className='logo'>Koraneza Farms</h1>
 								</Link>
@@ -213,8 +213,11 @@ class Navigation extends React.PureComponent {
 												Categories
 												<span className='fa fa-chevron-down dropdown-caret' />
 											</DropdownToggle>
-											<DropdownMenu right={true} className='nav-brand-dropdown'>
-												<div className='mini-brand'>
+											<DropdownMenu
+												right={true}
+												className='nav-category-dropdown'
+											>
+												<div className='mini-category'>
 													<MiniCategory
 														categories={categories}
 														toggleCategory={() => this.toggleCategory()}
@@ -294,7 +297,6 @@ const mapStateToProps = (state) => {
 		isCartOpen: state.navigation.isCartOpen,
 		isCategoryOpen: state.navigation.isCategoryOpen,
 		cartItems: state.cart.cartItems,
-		brands: state.brand.storeBrands,
 		categories: state.category.storeCategories,
 		authenticated: state.authentication.authenticated,
 		user: state.account.user,
