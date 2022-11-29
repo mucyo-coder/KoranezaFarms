@@ -1,2 +1,69 @@
 // .homepage {
+
 // }
+.caroussel-image-container{
+    // position: fixed;
+    // display: block;
+    // width: 100%;
+    // height: 100%;
+    // // top: 0;
+    // // left: 0;
+    // // right: 0;
+    // // bottom: 0;
+    // background-color: rgba(0,0,0,0.5);
+    // z-index: 2;
+    position: relative;
+}
+
+.caroussel-text{
+    position: absolute;
+    top: 40%;
+    left: 10%;
+    bottom: 0;
+}
+.overlay{
+    background-color: rgba(0,0,0,0.5);
+    position: absolute;
+    top:0;
+    height: 100%;
+    width: 100%;
+    display: block;
+}
+.subtitle{
+    font-size: 17.5px;
+    color: white;
+    margin-bottom: 7px;
+}
+.title{
+    font-size: 45px;
+    font-weight: 500;
+    margin-bottom: 12px;
+    color: white;
+}
+.description{
+    font-size: 17px;
+    font-weight: 400;
+    margin-bottom: 12px;
+    color: white;
+}
+.action-buttons{
+    gap: 30px;
+    display: flex;
+    margin-top: 20px;
+}
+.default-btn{
+    display: inline-block;
+    border: 1px solid white;
+    padding: 10px 30px;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    text-transform: uppercase;
+    background-color: transparent;
+    font-size: 14px;
+    font-weight: 400;
+    color: white !important;
+}
+.default-btn:hover{
+    color: black !important;
+    background-color: white;
+}

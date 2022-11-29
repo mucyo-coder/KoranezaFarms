@@ -7,6 +7,7 @@
 import React from "react";
 
 import { connect } from "react-redux";
+import { Container } from "reactstrap";
 
 import actions from "../../actions";
 
@@ -20,7 +21,13 @@ class CategoriesPage extends React.PureComponent {
 	render() {
 		const { categories } = this.props;
 
-		return <CategoryList categories={categories} />;
+		return (
+			<Container>
+				<div className="wrapper">
+					<CategoryList categories={categories} />
+				</div>
+			</Container>
+		);
 	}
 }
 
