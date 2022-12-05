@@ -25,7 +25,7 @@ KoranezaFarms store enable three main different flows or implementations:
 * Like below command, replace brackets with email and password. 
 * For more information, see code [here](server/utils/seed.js)
 
-```
+```****
 npm run seed:db [email-***@****.com] [password-******] // This is just an example.
 ```
 
