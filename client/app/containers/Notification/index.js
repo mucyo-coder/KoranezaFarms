@@ -12,7 +12,7 @@ import Notifications from 'react-notification-system-redux';
 import actions from '../../actions';
 
 class Notification extends React.PureComponent {
-  componentDidMount() {}
+  componentDidMount() { }
 
   render() {
     const { notifications } = this.props;
@@ -25,6 +25,9 @@ class Notification extends React.PureComponent {
 
         success: {
           color: 'red'
+        },
+        DelayNode: {
+          transitionDelay: '2s'
         }
       }
     };

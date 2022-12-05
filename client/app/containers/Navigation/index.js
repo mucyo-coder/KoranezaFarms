@@ -28,11 +28,8 @@ import {
 
 import actions from "../../actions";
 
-import Button from "../../components/Common/Button";
 import CartIcon from "../../components/Common/CartIcon";
-import { BarsIcon } from "../../components/Common/Icon";
 import MiniCategory from "../../components/Store//MiniCategory";
-import Menu from "../NavigationMenu";
 import Cart from "../Cart";
 
 class Navigation extends React.PureComponent {
@@ -75,11 +72,10 @@ class Navigation extends React.PureComponent {
 				<div className='d-flex'>
 					<img
 						className='item-image'
-						src={`${
-							suggestion.imageUrl
+						src={`${suggestion.imageUrl
 								? suggestion.imageUrl
 								: "/images/placeholder-image.png"
-						}`}
+							}`}
 						alt="logo"
 					/>
 					<div>
@@ -182,7 +178,7 @@ class Navigation extends React.PureComponent {
 								size: 4,
 								order: 3,
 							}}
-							// className='px-0'
+						// className='px-0'
 						>
 							<Navbar
 								color='light'

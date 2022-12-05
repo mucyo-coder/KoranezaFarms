@@ -85,7 +85,7 @@ export const login = () => {
 };
 
 export const signOut = () => {
-  return (dispatch, getState) => {
+  return (dispatch) => {
     const successfulOptions = {
       title: `You have signed out!`,
       position: 'tr',
@@ -93,6 +93,7 @@ export const signOut = () => {
     };
 
     dispatch(clearAuth());
+    dispatch(clearCart())
     dispatch(clearAccount());
     dispatch(push('/login'));
 
